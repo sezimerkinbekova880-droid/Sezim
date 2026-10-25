@@ -608,76 +608,42 @@
 </html>
 
     <script>
-        // --- Интерактив выбора кнопок (приду/не приду) ---
-        const radioLabels = document.querySelectorAll('.radio-label');
-        radioLabels.forEach(label => {
-            label.addEventListener('click', function() {
-                radioLabels.forEach(l => l.classList.remove('selected'));
-                this.classList.add('selected');
-                this.querySelector('input').checked = true;
-            });
-        });
-
+        
+// Загрузка списка гостей и пожеланий
+fetch(scriptUrl)
+  .then(response => response.json())
+  .then(data => {
+    const listDiv = document.getElementById("guestsList");
+    if (data.length === 0) {
+      listDiv.innerHTML = "<p style='text-align: center; color: #777;'>Пока нет ответов. Будьте первыми!</p>";
+      return;
+    }
+    
+    let html = "";
+    data.forEach(guest => {
+      let badgeColor = guest.attendance === "yes" ? "#4CAF50" : "#E53935";
+      let statusText = guest.attendance === "yes" ? "Придет" : "Не сможет";
+      
+      html += `
+        <div style="background: #fff; padding: 12px 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <strong style="color: #333; font-size: 15px;">${guest.name}</strong>
+            <span style="background: ${badgeColor}; color: white; padding: 3px 8px; border-radius: 12px; font-size: 11px;">${statusText}</span>
+          </div>
+          ${guest.message ? <p style="margin: 8px 0 0 0; color: #666; font-size: 13px; font-style: italic;">«${guest.message}»</p> : ""}
+        </div>
+      `;
+    });
+    listDiv.innerHTML = html;
+  })
+  .catch(error => {
+    console.error("Ошибка загрузки:", error);
+    document.getElementById("guestsList").innerHTML = "<p style='text-align: center; color: #777;'>Список пока пуст или загружается...</p>";
+  });
         // --- URL вашего Google Web App ---
         var scriptUrl = "https://script.google.com/macros/s/AKfycbyeJyilNLLSf3g99-CjFUhDL7SYRac3hPvCSv8ZoLzF6x8UgAcSwUqVp8uZ3r0aDsQ/exec";
 
-        // --- Обработка отправки формы ---
-        document.getElementById("weddingForm").addEventListener("submit", function(e) {
-            e.preventDefault();
-            
-            var form = this;
-            var data = {
-                name: document.getElementById("guestName").value,
-                attendance: document.querySelector('input[name="attendance"]:checked').value,
-                message: document.getElementById("guestMessage").value
-            };
-
-            fetch(scriptUrl, {
-                method: "POST",
-                mode: "no-cors",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            }).then(() => {
-                document.getElementById("successMsg").style.display = "block";
-                form.reset();
-                // Сбрасываем визуальный выбор радиокнопок по умолчанию
-                document.getElementById('labelYes').click();
-                setTimeout(() => {
-                    document.getElementById("successMsg").style.display = "none";
-                }, 5000);
-                // Обновляем список на сайте через 1.5 секунды
-                setTimeout(loadGuests, 1500);
-            }).catch(error => console.error('Ошибка!', error));
-        });
-
-        // --- Загрузка списка гостей и пожеланий ---
-        function loadGuests() {
-            fetch(scriptUrl)
-                .then(response => response.json())
-                .then(data => {
-                    var container = document.getElementById("guestsList");
-                    if (!data || data.length === 0) {
-                        container.innerHTML = "<p style='text-align:center; color:#888;'>Пока нет ответов. Будьте первыми!</p>";
-                        return;
-                    }
-                    
-                    var html = "";
-                    // Переворачиваем массив, чтобы новые ответы были сверху
-                    data.slice().reverse().forEach(guest => {
-                        var statusText = guest.attendance === "yes" ? "✨ Придет" : "❌ Не сможет";
-                        var statusColor = guest.attendance === "yes" ? "#2d6a4f" : "#bc6c25";
-                        html += `<div class="guest-item">
-                            <div class="guest-name">${guest.name} <span style="font-size: 13px; color: ${statusColor}; font-weight: normal; float: right;">${statusText}</span></div><div class="guest-message">«${guest.message || 'Без пожелания'}»</div>
-                        </div>`;
-                    });
-                    container.innerHTML = html;
-                })
-                .catch(err => {
-                    document.getElementById("guestsList").innerHTML = "<p style='text-align:center; color:#888;'>Список скоро появится.</p>";
-                });
-        }
+       
 
         // Загружаем список при открытии страницы
         loadGuests();
