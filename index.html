@@ -3,530 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Свадебное приглашение | Кутман & Сезим</title>
-    <!-- Подключаем изящные шрифты с Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Кутман & Сезим — 07.07.2027</title>
     <style>
-        :root {
-            --primary-color: #6a5349;
-            --accent-color: #b0978e;
-            --bg-color: #fcfbfa;
-            --text-color: #4a4542;
-            --card-bg: #ffffff;
-            --border-color: #efebe9;
-        }
-
-        * {
-            box-sizing: border-box;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fdfbf7;
+            color: #2c2c2c;
             margin: 0;
             padding: 0;
         }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
             padding: 20px;
         }
-
-        .container {
-            max-width: 650px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-
-        /* 1. Шапка и имена */
-        .header {
-            text-align: center;
-            padding: 50px 20px 30px;
-            background: linear-gradient(to bottom, #f7f4f2, #ffffff);
-        }
-
-        .header h3 {
-            font-weight: 300;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            font-size: 13px;
-            color: var(--accent-color);
-            margin-bottom: 10px;
-        }
-
-        .header h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 38px;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        /* Красивый каллиграфический шрифт для имен */
-        .names {
-            font-family: 'Alex Brush', cursive;
-            font-size: 68px;
-            color: var(--primary-color);
-            margin: 10px 0 20px 0;
-            line-height: 1;
-        }
-
-        .intro-text {
-            padding: 0 30px;
-            font-size: 16px;
-            color: #666;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        /* 2. Дата */
-        .date-badge {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 26px;
-            font-weight: 600;
-            color: var(--primary-color);
-            text-align: center;
-            margin: 20px 0;
-            letter-spacing: 1px;
-        }
-
-        /* 3. Календарь Июля 2027 */
-        .calendar-section {
-            padding: 20px 30px;
-            text-align: center;
-            background: #fdfbf9;
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .calendar-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        .calendar {
-            max-width: 320px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 8px;
-            font-size: 14px;
-        }
-
-        .calendar .day-name {
-            font-weight: 600;
-            color: var(--accent-color);
-            font-size: 12px;
-            text-transform: uppercase;
-            padding-bottom: 5px;
-        }
-
-        .calendar .day {
-            aspect-ratio: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            color: var(--text-color);
-        }
-
-        .calendar .day.active {
-            background-color: var(--primary-color);
-            color: #fff;
-            font-weight: 600;
-            position: relative;
-            box-shadow: 0 4px 10px rgba(106, 83, 73, 0.3);
-        }
-
-        /* Сердечко на активную дату */
-        .calendar .day.active::after {
-            content: '♥';
-            position: absolute;
-            top: -6px;
-            right: -2px;
-            font-size: 11px;
-            color: #d97777;
-        }
-
-        /* 4. Фотогалерея */
-        .gallery-section {
-            padding: 40px 30px;
-            text-align: center;
-        }
-
-        .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
-            color: var(--primary-color);
-            margin-bottom: 25px;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .gallery-item {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.02);
-        }
-
-        /* 5. Таймер обратного отсчета */
-        .countdown-section {
-            padding: 30px;
-            background: #f7f4f2;
-            text-align: center;
-        }
-
-        .countdown-title {
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent-color);
-            margin-bottom: 15px;
-        }
-
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .time-box {
-            background: #ffffff;
-            padding: 12px 10px;
-            border-radius: 8px;
-            min-width: 65px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-        }
-
-        .time-box span {
-            display: block;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 26px;
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .time-box label {
-            font-size: 10px;
-            text-transform: uppercase;
-            color: #888;
-            letter-spacing: 1px;
-        }
-
-        /* 6. Той ээлери */
-        .hosts-section {
-            padding: 35px 30px;
-            text-align: center;
-            background: #fdfbf9;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .hosts-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-
-        .hosts-names {
-            font-size: 16px;
-            color: #666;
-            font-weight: 500;
-        }
-
-        /* 8. Адрес и 2GIS */
-        .location-section {
-            padding: 35px 30px;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .location-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-
-        .location-address {
-            font-size: 15px;
-            color: #666;
-            margin-bottom: 20px;
-        }
-
-        .map-btn {
-            display: inline-block;
-            background: #00b067; /* Фирменный цвет 2GIS */
-            color: #fff;
-            padding: 12px 25px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 14px;
-            transition: opacity 0.3s;
-            box-shadow: 0 4px 12px rgba(0, 176, 103, 0.2);
-        }
-
-        .map-btn:hover {
-            opacity: 0.9;
-        }
-
-        /* 7 & 9. RSVP и Пожелания */
         .form-section {
-            background: #f7f4f2;
-            padding: 40px 30px;
-            border-top: 1px solid var(--border-color);
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-top: 20px;
         }
-
+        .section-title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-family: serif;
+        }
         .form-group {
             margin-bottom: 20px;
-            text-align: left;
         }
-
         .form-group label {
             display: block;
-            font-size: 13px;
             margin-bottom: 8px;
-            color: var(--primary-color);font-weight: 500;
+            font-weight: 500;
         }
-
         .form-control {
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #dcd6d0;
-            border-radius: 6px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
-            background: #fff;
-            color: var(--text-color);
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
         }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--accent-color);
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 90px;
-        }
-
         .attendance-options {
             display: flex;
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 15px;
         }
-
         .radio-label {
             flex: 1;
-            padding: 12px 10px;
-            border: 1px solid #dcd6d0;
-            border-radius: 6px;
+            padding: 12px;
             text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 13px;
-            background: #fff;
         }
-
+        .radio-label.selected {
+            background-color: #6b5b55;
+            color: white;
+            border-color: #6b5b55;
+        }
         .radio-label input {
             display: none;
         }
-
-        .radio-label.selected {
-            background: var(--primary-color);
-            color: #fff;
-            border-color: var(--primary-color);
-        }
-
         .submit-btn {
             width: 100%;
-            background: var(--primary-color);
-            color: #fff;
-            border: none;
             padding: 14px;
-            border-radius: 6px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 15px;
-            font-weight: 500;
+            background-color: #6b5b55;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
             cursor: pointer;
-            transition: background 0.3s ease;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            transition: background 0.3s;
         }
-
         .submit-btn:hover {
-            background: #534038;
+            background-color: #554742;
         }
-
-        .success-message {
+        #successMsg {
             display: none;
-            text-align: center;
-            color: #2e7d32;
-            font-weight: 500;
             margin-top: 15px;
-        }
-
-        /* 10. Благодарность */
-        .footer-thanks {
-            padding: 40px 30px;
+            padding: 12px;
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 8px;
             text-align: center;
-            background: #fff;
-            border-top: 1px solid var(--border-color);
         }
-
-        .footer-thanks p {
-            font-family: 'Cormorant Garamond', serif;
+        .guests-container {
+            margin-top: 30px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .guest-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .guest-item:last-child {
+            border-bottom: none;
+        }
+        .guest-name {
+            font-weight: bold;
+            color: #444;
+        }
+        .guest-message {
             font-style: italic;
-            font-size: 22px;
-            color: var(--primary-color);
-        }
-
-        @media (max-width: 480px) {
-            .names {
-                font-size: 56px;
-            }
-            .header, .content, .gallery-section, .form-section, .hosts-section, .location-section {
-                padding-left: 15px;
-                padding-right: 15px;
-            }
+            color: #666;
+            margin-top: 4px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Шапка -->
-        <div class="header">
-            <h3>Свадебное приглашение</h3>
-            
-            <!-- 1. Имена красивым шрифтом -->
-            <div class="names">Кутман & Сезим</div>
-            <p class="intro-text">Дорогие родные и друзья! Приглашаем вас разделить с нами радость создания нашей семьи.</p>
-        </div>
+        <body>
+    <div class="container">
+        
+        <!-- Вставляем фото сюда, перед анкетой -->
+        <img src="photo_1.jpg" alt="Наше фото" style="width: 100%; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+        
+     
+        <img src="photo_2.jpg" alt="Наше фото" style="width: 100%; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
 
-        <!-- 2. Дата -->
-        <div class="date-badge">
-            07 · 07 · 2027
-        </div>
-
-        <!-- 3. Календарь июля 2027 с сердечком на 7 числе -->
-        <div class="calendar-section">
-            <div class="calendar-title">Июль 2027</div>
-            <div class="calendar">
-                <div class="day-name">Пн</div>
-                <div class="day-name">Вт</div>
-                <div class="day-name">Ср</div>
-                <div class="day-name">Чт</div>
-                <div class="day-name">Пт</div>
-                <div class="day-name">Сб</div>
-                <div class="day-name">Вс</div>
-
-                <!-- Дни недели для июля 2027 (1 июля — четверг) -->
-                <div class="day"></div>
-                <div class="day"></div>
-                <div class="day"></div>
-                <div class="day">1</div>
-                <div class="day">2</div>
-                <div class="day">3</div>
-                <div class="day">4</div><div class="day">5</div>
-                <div class="day">6</div>
-                <div class="day active">7</div> <!-- 7 июля с сердечком -->
-                <div class="day">8</div>
-                <div class="day">9</div>
-                <div class="day">10</div>
-                <div class="day">11</div>
-                <div class="day">12</div>
-                <div class="day">13</div>
-                <div class="day">14</div>
-                <div class="day">15</div>
-                <div class="day">16</div>
-                <div class="day">17</div>
-                <div class="day">18</div>
-                <div class="day">19</div>
-                <div class="day">20</div>
-                <div class="day">21</div>
-                <div class="day">22</div>
-                <div class="day">23</div>
-                <div class="day">24</div>
-                <div class="day">25</div>
-                <div class="day">26</div>
-                <div class="day">27</div>
-                <div class="day">28</div>
-                <div class="day">29</div>
-                <div class="day">30</div>
-                <div class="day">31</div>
-            </div>
-        </div>
-
-        <!-- 4. Фотогалерея (Замените ссылки на фотографии на свои реальные) -->
-        <div class="gallery-section">
-            <div class="section-title">Наша история</div>
-            <div class="gallery-grid">
-                <img src="photo_1.jpg" alt="Фото 1" class="gallery-item">
-                <img src="photo_2.jpg" alt="Фото 2" class="gallery-item">
-            </div>
-        </div>
-
-        <!-- 5. Таймер обратного отсчета -->
-        <div class="countdown-section">
-            <div class="countdown-title">До свадьбы осталось:</div>
-            <div class="countdown" id="countdown">
-                <div class="time-box">
-                    <span id="days">00</span>
-                    <label>Дней</label>
-                </div>
-                <div class="time-box">
-                    <span id="hours">00</span>
-                    <label>Часов</label>
-                </div>
-                <div class="time-box">
-                    <span id="minutes">00</span>
-                    <label>Минут</label>
-                </div>
-                <div class="time-box">
-                    <span id="seconds">00</span>
-                    <label>Секунд</label>
-                </div>
-            </div>
-        </div>
-
-        <!-- 6. Той ээлери -->
-        <div class="hosts-section">
-            <div class="hosts-title">Той ээлери</div>
-            <div class="hosts-names">Урматтуу __________________________</div>
-        </div>
-
-        <!-- 8. Адрес и 2GIS -->
-        <div class="location-section">
-            <div class="location-name">Ресторан «____________»</div>
-            <div class="location-address">___________________________ / Сбор гостей в 17:00</div>
-            <!-- Ссылку на 2GIS можно заменить на точную точку вашего ресторана -->
-            <a href="https://2gis.kg/bishkek" target="_blank" class="map-btn">Открыть в 2GIS</a>
-        </div>
-
+       
+      
         <!-- 7 & 9. RSVP (Придут/Не придут) и Пожелания -->
         <div class="form-section">
-            <div class="section-title" style="text-align: center; font-size: 24px; margin-bottom: 20px;">Анкета гостя</div>
+            <div class="section-title">Анкета гостя</div>
+            
             <form id="weddingForm" action="https://script.google.com/macros/s/AKfycbyeJyilNLLSf3g99-CjFUhDL7SYRac3hPvCSv8ZoLzF6x8UgAcSwUqVp8uZ3r0aDsQ/exec" method="POST">
                 <div class="form-group">
                     <label for="guestName">Ваше Имя и Фамилия</label>
-                    <input type="text" id="guestName" class="form-control" placeholder="Например, Акылбек и Айгерим" required>
+                    <input type="text" id="guestName" name="name" class="form-control" placeholder="Например, Бакыт и Айгерим" required>
                 </div>
 
                 <div class="form-group">
@@ -541,50 +151,25 @@
                     </div>
                 </div>
 
-                <!-- 9. Место для пожеланий -->
                 <div class="form-group">
-                    <label for="guestWishes">Ваши пожелания молодоженам</label>
-                    <textarea id="guestWishes" class="form-control" placeholder="Напишите теплые слова..."></textarea>
+                    <label for="guestMessage">Ваши пожелания молодоженам</label>
+                    <textarea id="guestMessage" name="message" class="form-control" rows="3" placeholder="Напишите теплые слова..."></textarea>
                 </div>
 
-                <button type="submit" class="submit-btn">Отправить ответ</button>
-                <div class="success-message" id="successMsg">Спасибо! Ваш ответ успешно сохранен.</div>
+                <button type="submit" class="submit-btn">ОТПРАВИТЬ ОТВЕТ</button>
+                
+                <div id="successMsg">Спасибо! Ваш ответ успешно отправлен ✨</div>
             </form>
         </div>
 
-        <!-- 10. Благодарность за уделенное время -->
-        <div class="footer-thanks">
-            <p>Спасибо за то, что уделили нам время и разделили этот момент!</p>
+        <!-- Блок отображения списка гостей и пожеланий -->
+        <div class="guests-container">
+            <h3 style="text-align: center; margin-bottom: 15px; font-family: serif; font-size: 20px;">Пожелания гостей</h3>
+            <div id="guestsList">Загрузка ответов...</div>
         </div>
     </div>
 
     <script>
-        // --- Таймер обратного отсчета на 07.07.2027 17:00:00 ---
-        const weddingDate = new Date(2027, 6, 7, 17, 0, 0).getTime();
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
-
-            if (distance < 0) {
-                document.getElementById("countdown").innerHTML = "<div style='font-size: 18px; color: var(--primary-color); font-weight: 600;'>День свадьбы настал! Ура!</div>";
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = String(days).padStart(2, '0');
-            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
-        }
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
         // --- Интерактив выбора кнопок (приду/не приду) ---
         const radioLabels = document.querySelectorAll('.radio-label');
         radioLabels.forEach(label => {
@@ -595,32 +180,69 @@
             });
         });
 
-        // --- Обработка отправки формы ---
-document.getElementById("weddingForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-    
-    var form = this;
-    var data = {
-        name: document.getElementById("guestName").value,
-        attendance: document.querySelector('input[name="attendance"]:checked').value,
-        message: document.querySelector('textarea, input[name="message"]') ? document.querySelector('textarea, input[name="message"]').value : ""
-    };
+        // --- URL вашего Google Web App ---
+        var scriptUrl = "https://script.google.com/macros/s/AKfycbyeJyilNLLSf3g99-CjFUhDL7SYRac3hPvCSv8ZoLzF6x8UgAcSwUqVp8uZ3r0aDsQ/exec";
 
-    fetch(form.action, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    }).then(() => {
-        document.getElementById("successMsg").style.display = "block";
-        form.reset();
-        setTimeout(() => {
-            document.getElementById("successMsg").style.display = "none";
-        }, 5000);
-    }).catch(error => console.error('Ошибка!', error));
-});
+        // --- Обработка отправки формы ---
+        document.getElementById("weddingForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            var form = this;
+            var data = {
+                name: document.getElementById("guestName").value,
+                attendance: document.querySelector('input[name="attendance"]:checked').value,
+                message: document.getElementById("guestMessage").value
+            };
+
+            fetch(scriptUrl, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }).then(() => {
+                document.getElementById("successMsg").style.display = "block";
+                form.reset();
+                // Сбрасываем визуальный выбор радиокнопок по умолчанию
+                document.getElementById('labelYes').click();
+                setTimeout(() => {
+                    document.getElementById("successMsg").style.display = "none";
+                }, 5000);
+                // Обновляем список на сайте через 1.5 секунды
+                setTimeout(loadGuests, 1500);
+            }).catch(error => console.error('Ошибка!', error));
+        });
+
+        // --- Загрузка списка гостей и пожеланий ---
+        function loadGuests() {
+            fetch(scriptUrl)
+                .then(response => response.json())
+                .then(data => {
+                    var container = document.getElementById("guestsList");
+                    if (!data || data.length === 0) {
+                        container.innerHTML = "<p style='text-align:center; color:#888;'>Пока нет ответов. Будьте первыми!</p>";
+                        return;
+                    }
+                    
+                    var html = "";
+                    // Переворачиваем массив, чтобы новые ответы были сверху
+                    data.slice().reverse().forEach(guest => {
+                        var statusText = guest.attendance === "yes" ? "✨ Придет" : "❌ Не сможет";
+                        var statusColor = guest.attendance === "yes" ? "#2d6a4f" : "#bc6c25";
+                        html += `<div class="guest-item">
+                            <div class="guest-name">${guest.name} <span style="font-size: 13px; color: ${statusColor}; font-weight: normal; float: right;">${statusText}</span></div><div class="guest-message">«${guest.message || 'Без пожелания'}»</div>
+                        </div>`;
+                    });
+                    container.innerHTML = html;
+                })
+                .catch(err => {
+                    document.getElementById("guestsList").innerHTML = "<p style='text-align:center; color:#888;'>Список скоро появится.</p>";
+                });
+        }
+
+        // Загружаем список при открытии страницы
+        loadGuests();
     </script>
 </body>
 </html>
